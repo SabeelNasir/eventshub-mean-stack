@@ -13,4 +13,10 @@ export class EventsService {
   public getEvents(): Observable<Events> {
     return this.http.get<Events>(this.config.apiUrl + '/events')
   }
+  public getUserEvents(): Observable<Events> {
+    return this.http.get<Events>(this.config.apiUrl + '/user-events')
+  }
+  public getSpecialEvents(): Observable<Events> {
+    return this.http.get<Events>(this.config.apiUrl + '/special-events');
+  }
 }

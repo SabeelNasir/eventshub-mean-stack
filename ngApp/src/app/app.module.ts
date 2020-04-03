@@ -1,23 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
-import { EventsComponent } from './events/events.component';
-import { SpecialEventsComponent } from './special-events/special-events.component';
+import { LoginComponent } from './components/login/login.component';
+import { EventsComponent } from './components/events/events.component';
+import { SpecialEventsComponent } from './components/special-events/special-events.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { MyErrorHandler } from './handlers/my-error-handler';
+import { UserEventsComponent } from './components/user-events/user-events.component';
+import { EventDetailComponent } from './components/event-detail/event-detail.component';
 
-const routes: Routes = [
-  { path: '', redirectTo: 'events', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'events', component: EventsComponent },
-  { path: 'special', component: SpecialEventsComponent },
-]
+
 
 @NgModule({
   declarations: [
@@ -25,16 +23,20 @@ const routes: Routes = [
     RegisterComponent,
     LoginComponent,
     EventsComponent,
-    SpecialEventsComponent
+    SpecialEventsComponent,
+    UserEventsComponent,
+    EventDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: ErrorHandler, useClass: MyErrorHandler }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

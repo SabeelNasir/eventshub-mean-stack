@@ -1,43 +1,35 @@
+const Events = require('../models/events')
 module.exports = {
     async getEvents(req, res) {
-        const data = [
-            {
-                "_id": "1",
-                "name": "Auto Expo",
-                "description": "lorem ipsum",
-                "date": "2012-04-23T18:25:43.511Z"
-            },
-            {
-                "_id": "2",
-                "name": "Auto Expo",
-                "description": "lorem ipsum",
-                "date": "2012-04-23T18:25:43.511Z"
-            },
-            {
-                "_id": "3",
-                "name": "Auto Expo",
-                "description": "lorem ipsum",
-                "date": "2012-04-23T18:25:43.511Z"
-            },
-            {
-                "_id": "4",
-                "name": "Auto Expo",
-                "description": "lorem ipsum",
-                "date": "2012-04-23T18:25:43.511Z"
-            },
-            {
-                "_id": "5",
-                "name": "Auto Expo",
-                "description": "lorem ipsum",
-                "date": "2012-04-23T18:25:43.511Z"
-            },
-            {
-                "_id": "6",
-                "name": "Auto Expo",
-                "description": "lorem ipsum",
-                "date": "2012-04-23T18:25:43.511Z"
+        try {
+            const data = await Events.find()
+            res.send(data)
+        } catch (error) {
+            res.status(400).send({ message: error.message })
+        }
+    },
+    async saveEvent(req, res) {
+        try {
+            const user = req.session.user
+            const postedBody = req.body
+            postedBody.userId = user._id
+            const savedEvent = await new Events(postedBody).save()
+            res.status(201).send(savedEvent)
+        } catch (error) {
+            res.status(400).send({ message: error.message })
+        }
+    },
+    async getUserEvent(req, res) {
+        try {
+            const user = req.session.user
+            if (user) {
+                const data = await Events.find({ userId: user._id })
+                res.send(data)
+            } else {
+                res.status(403).send({ message: 'Invalid Parameters' })
             }
-        ]
-        res.status(200).send(data)
+        } catch (error) {
+            res.status(400).send({ message: error.message })
+        }
     }
 }

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { EventsService } from '../services/events.service';
-import { Events } from '../models/events';
+import { EventsService } from '../../services/events.service';
+import { Events } from '../../models/events';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-special-events',
-  templateUrl: './special-events.component.html',
-  styleUrls: ['./special-events.component.css']
+  selector: 'app-events',
+  templateUrl: './events.component.html',
+  styleUrls: ['./events.component.css']
 })
-export class SpecialEventsComponent implements OnInit {
+export class EventsComponent implements OnInit {
 
   constructor(private eventsService: EventsService) { }
   public events: Events;
@@ -20,5 +21,4 @@ export class SpecialEventsComponent implements OnInit {
       console.log(this.events);
     }, error => console.log(error));
   }
-
 }
