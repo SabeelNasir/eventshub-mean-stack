@@ -7,15 +7,21 @@ import { SpecialEventsComponent } from './components/special-events/special-even
 import { AuthGuard } from './guards/auth.guard';
 import { UserEventsComponent } from './components/user-events/user-events.component';
 import { AvenuesComponent } from './avenues/avenues.component';
+import { EventsListComponent } from './components/events/events-list/events-list.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'events', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'events', component: EventsComponent },
+  {
+    path: 'events', children: [
+      { path: '', component: EventsListComponent },
+      // { path: 'list', component: EventsListComponent },
+      { path: 'special', component: SpecialEventsComponent, canActivate: [AuthGuard] },
+    ]
+  },
   { path: 'user-events', component: UserEventsComponent, canActivate: [AuthGuard] },
-  { path: 'special', component: SpecialEventsComponent, canActivate: [AuthGuard] },
   { path: 'avenues', loadChildren: () => import('./avenues/avenues.module').then(m => m.AvenuesModule) },
   // { path: 'avenues', component: AvenuesComponent },
   { path: '**', component: EventsComponent }

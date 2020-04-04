@@ -5,7 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Routes, RouterModule } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { EventsComponent } from './components/events/events.component';
@@ -14,6 +13,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { MyErrorHandler } from './handlers/my-error-handler';
 import { UserEventsComponent } from './components/user-events/user-events.component';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
+import { EventsListComponent } from './components/events/events-list/events-list.component';
+import { NavbarComponent } from './layouts/navbar/navbar.component';
 
 
 
@@ -25,7 +26,9 @@ import { EventDetailComponent } from './components/event-detail/event-detail.com
     EventsComponent,
     SpecialEventsComponent,
     UserEventsComponent,
-    EventDetailComponent
+    EventDetailComponent,
+    EventsListComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.formData.value).subscribe(res => {
         this.loggedUser = res as User;
         localStorage.setItem(this.constants.tokenKey, this.loggedUser.token);
-        this._router.navigate(['/special'])
+        this.authService.setUserInCookie(this.loggedUser)
+        this._router.navigate(['/events/special'])
       }, err => {
         if (err instanceof HttpErrorResponse) {
           if (err.status == 404) {

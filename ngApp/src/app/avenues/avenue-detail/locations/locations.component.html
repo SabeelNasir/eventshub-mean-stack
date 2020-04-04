@@ -1,1 +1,24 @@
 <h4>Locations</h4>
+<div class="row">
+    <div class="form-group">
+        <div class="col-6">
+            <a [routerLink]="'create'" class="btn btn-small btn-primary">Create Location</a>
+        </div>
+        <div class="col-6">
+            <a [routerLink]="'list'" class="btn btn-small btn-primary">Show locations List</a>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-xs-12 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                
+            </div>
+            <div class="card-body">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

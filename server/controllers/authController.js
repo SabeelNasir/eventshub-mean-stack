@@ -17,10 +17,10 @@ module.exports = {
                 userData.password = await bcryptionUtil.encryptPassword(userData.password)
                 let user = new User(userData).save((error, user) => {
                     if (error) {
-                        console.log(error)
+                        throw new Error(error)
                     } else {
                         const token = signUser(user)
-                        res.status(200).send({ _id: user._id, email: user.email, token: token })
+                        res.status(200).send({ _id: user._id, email: user.email, token: token, role: user.role })
                     }
                 })
             } else {
@@ -40,9 +40,7 @@ module.exports = {
                 if (match) {
                     // sign jsonwebtoken to verify routes later
                     const token = signUser(user)
-                    payLoad = user.toObject()
-                    payLoad.token = token
-                    res.status(200).send(payLoad)
+                    res.status(200).send({ _id: user._id, email: user.email, token: token, role: user.role })
                 } else {
                     res.status(404).send('Invalid Password')
                 }
