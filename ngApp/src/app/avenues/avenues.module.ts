@@ -6,6 +6,7 @@ import { ListAvenueComponent } from './list-avenue/list-avenue.component';
 import { AvenueDetailComponent } from './avenue-detail/avenue-detail.component';
 import { AvenueFormComponent } from './avenue-form/avenue-form.component';
 import { AvenuesComponent } from './avenues.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { AvenuesComponent } from './avenues.component';
   ],
   imports: [
     CommonModule,
-    AvenuesRoutingModule
+    AvenuesRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class AvenuesModule { }

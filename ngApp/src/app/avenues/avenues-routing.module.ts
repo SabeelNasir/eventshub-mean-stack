@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AvenuesComponent } from './avenues.component';
 import { ListAvenueComponent } from './list-avenue/list-avenue.component';
 import { AvenueFormComponent } from './avenue-form/avenue-form.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   },
   { path: 'list', component: ListAvenueComponent },
   { path: 'create', component: AvenueFormComponent },
-  { path: 'detail', loadChildren: () => import('./avenue-detail/avenue-detail.module').then(m => m.AvenueDetailModule) },
+  { path: 'create/:id', component: AvenueFormComponent },
+  { path: 'detail', loadChildren: () => import('./avenue-detail/avenue-detail.module').then(m => m.AvenueDetailModule), canActivate: [AuthGuard] },
 ];
 
 @NgModule({

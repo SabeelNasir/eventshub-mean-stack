@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Avenues } from 'src/app/models/avenues';
 
 @Component({
   selector: 'app-list-avenue',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListAvenueComponent implements OnInit {
 
+  @Input() data: Avenues
   constructor() { }
 
   ngOnInit(): void {

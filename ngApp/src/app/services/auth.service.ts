@@ -41,7 +41,6 @@ export class AuthService {
   }
   public isAdmin() {
     const user: User = JSON.parse(this.cookieService.get('userCookie'));
-    console.log(user)
     if (user) {
       if (user.role == 'Admin')
         return true
@@ -51,7 +50,6 @@ export class AuthService {
   }
   public setUserInCookie(user: User) {
     this.cookieService.set('userCookie', JSON.stringify(user));
-    console.log(this.cookieService.get('userCookie'))
   }
 
 }

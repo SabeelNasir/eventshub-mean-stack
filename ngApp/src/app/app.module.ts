@@ -7,14 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { EventsComponent } from './components/events/events.component';
-import { SpecialEventsComponent } from './components/special-events/special-events.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { MyErrorHandler } from './handlers/my-error-handler';
-import { UserEventsComponent } from './components/user-events/user-events.component';
-import { EventDetailComponent } from './components/event-detail/event-detail.component';
-import { EventsListComponent } from './components/events/events-list/events-list.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
+import { NotFoundComponent } from './layouts/not-found/not-found.component';
 
 
 
@@ -23,12 +19,8 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    EventsComponent,
-    SpecialEventsComponent,
-    UserEventsComponent,
-    EventDetailComponent,
-    EventsListComponent,
-    NavbarComponent
+    NavbarComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

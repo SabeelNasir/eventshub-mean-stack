@@ -2,29 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { EventsComponent } from './components/events/events.component';
-import { SpecialEventsComponent } from './components/special-events/special-events.component';
-import { AuthGuard } from './guards/auth.guard';
-import { UserEventsComponent } from './components/user-events/user-events.component';
-import { AvenuesComponent } from './avenues/avenues.component';
-import { EventsListComponent } from './components/events/events-list/events-list.component';
+import { NotFoundComponent } from './layouts/not-found/not-found.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'events', pathMatch: 'full' },
+  { path: '', redirectTo: 'avenues', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  {
-    path: 'events', children: [
-      { path: '', component: EventsListComponent },
-      // { path: 'list', component: EventsListComponent },
-      { path: 'special', component: SpecialEventsComponent, canActivate: [AuthGuard] },
-    ]
-  },
-  { path: 'user-events', component: UserEventsComponent, canActivate: [AuthGuard] },
+  { path: 'events', loadChildren: () => import('./components/events/events.module').then(m => m.EventsModule) },
   { path: 'avenues', loadChildren: () => import('./avenues/avenues.module').then(m => m.AvenuesModule) },
-  // { path: 'avenues', component: AvenuesComponent },
-  { path: '**', component: EventsComponent }
+  { path: '**', component: NotFoundComponent }
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
